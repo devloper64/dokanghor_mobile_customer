@@ -1,4 +1,8 @@
-import 'package:ecommerce_customer_app/components/default_button.dart';
+import 'package:ecommerce_customer_app/components/Intro_button.dart';
+import 'package:ecommerce_customer_app/components/LoadingWidget.dart';
+
+import 'package:ecommerce_customer_app/dio/IntroListBloc.dart';
+import 'package:ecommerce_customer_app/model/reponse/intro/IntroResponse.dart';
 import 'package:ecommerce_customer_app/screen/intro/components/IntroScreenContent.dart';
 import 'package:ecommerce_customer_app/size_config.dart';
 import 'package:flutter/cupertino.dart';
@@ -14,70 +18,79 @@ class IntroScreenBody extends StatefulWidget {
 }
 
 class _IntroScreenState extends State<IntroScreenBody> {
+
+
   int currentPage = 0;
-  List<Map<String, String>> splashData = [
-    {
-      "text": "Welcome to Tokoto, Let’s shop!",
-      "image": "assets/images/splash_1.png"
-    },
-    {
-      "text": "We help people conect with store \naround United State of America",
-      "image": "assets/images/splash_2.png"
-    },
-    {
-      "text": "We show the easy way to shop. \nJust stay at home with us",
-      "image": "assets/images/splash_3.png"
-    },
-  ];
+
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    introsBloc..getIntros();
+  }
+
   @override
   Widget build(BuildContext context) {
+    return StreamBuilder<List<IntroResponse>>(
+            stream: introsBloc.subject.stream,
+            builder: (context, AsyncSnapshot<List<IntroResponse>> snapshot) {
+              if (snapshot.hasData) {
+                return _buildIntrosWidget(snapshot.data!);
+              }else{
+                return LoadingWidget.buildLoadingWidget();
+              }
+            }
+        );
+
+  }
+  Widget _buildIntrosWidget(List<IntroResponse> data) {
     return SafeArea(
         child: SizedBox(
-      width: double.infinity,
-      child: Column(
-        children: <Widget>[
-          Expanded(
-            flex: 3,
-            child: PageView.builder(
-              onPageChanged: (value){
-                setState(() {
-                  currentPage=value;
-                });
-              },
-              itemCount: splashData.length,
-              itemBuilder: (BuildContext context, int index) => IntroScreenContent(
-                  text:  splashData[index]['text']!,
-                  image:  splashData[index]["image"]!
-              ),
-            ),
-          ),
-          Expanded(
-            flex: 2,
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(36),),
-              child: Column(
-                children: <Widget>[
-                  Spacer(),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: List.generate(splashData.length, (index) => buildDot(index: index)),
+          width: double.infinity,
+          child: Column(
+            children: <Widget>[
+              Expanded(
+                flex: 3,
+                child: PageView.builder(
+                  onPageChanged: (value){
+                    setState(() {
+                      currentPage=value;
+                    });
+                  },
+                  itemCount: data.length,
+                  itemBuilder: (BuildContext context, int index) => IntroScreenContent(
+                      text:  data[index].text,
+                      image: data[index].image
                   ),
-                  Spacer(flex: 3),
-                  DefaultButton(
-                    text: "Continue",
-                    press: () {
-                     // Navigator.pushNamed(context, SignInScreen.routeName);
-                    },
-                  ),
-                  Spacer(),
-                ],
+                ),
               ),
-            ),
+              Expanded(
+                flex: 2,
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(36),),
+                  child: Column(
+                    children: <Widget>[
+                      Spacer(),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: List.generate(data.length, (index) => buildDot(index: index)),
+                      ),
+                      Spacer(flex: 3),
+                      IntroButton(
+                        text: "Continue",
+                        routeName:"/home",
+                      ),
+                      Spacer(),
+                    ],
+                  ),
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
-    ));
+        ));
   }
+
 
   AnimatedContainer buildDot({int? index}) {
     return AnimatedContainer(

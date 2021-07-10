@@ -27,12 +27,15 @@ class IntroScreenContent extends StatelessWidget{
             fontWeight: FontWeight.bold,
           ),
         ),
-        Text(
-          text,
-          textAlign: TextAlign.center,
+        Container(
+          margin: EdgeInsets.only(top: 10),
+          child:  Text(
+            text,
+            textAlign: TextAlign.center,
+          ),
         ),
         Spacer(flex: 2),
-        Image.asset(
+        Image.network(
           image,
           height: getProportionateScreenHeight(265),
           width: getProportionateScreenWidth(235),

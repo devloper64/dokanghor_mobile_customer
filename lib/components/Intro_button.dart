@@ -1,16 +1,17 @@
+import '../SharedPrefsHelper.dart';
 import 'package:flutter/material.dart';
 
 import '../constants.dart';
 import '../size_config.dart';
 
-class DefaultButton extends StatelessWidget {
-  const DefaultButton({
+class IntroButton extends StatelessWidget {
+  const IntroButton({
     Key? key,
     required this.text,
-    required this.press,
+    required this.routeName,
   }) : super(key: key);
   final String text;
-  final Function press;
+  final String routeName;
 
 
   @override
@@ -22,7 +23,8 @@ class DefaultButton extends StatelessWidget {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         color: kPrimaryColor,
         onPressed: (){
-
+          Navigator.pushNamed(context, routeName);
+          SharedPrefsHelper.storeFirstTimeOpenStatus(true);
       },
         child: Text(
           text,
