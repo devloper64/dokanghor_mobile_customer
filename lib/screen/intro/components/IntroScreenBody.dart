@@ -1,7 +1,7 @@
 import 'package:ecommerce_customer_app/components/Intro_button.dart';
 import 'package:ecommerce_customer_app/components/LoadingWidget.dart';
 
-import 'package:ecommerce_customer_app/dio/IntroListBloc.dart';
+import 'package:ecommerce_customer_app/bloc/IntroListBloc.dart';
 import 'package:ecommerce_customer_app/model/reponse/intro/IntroResponse.dart';
 import 'package:ecommerce_customer_app/screen/intro/components/IntroScreenContent.dart';
 import 'package:ecommerce_customer_app/size_config.dart';

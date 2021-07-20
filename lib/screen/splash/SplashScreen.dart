@@ -6,6 +6,7 @@ import 'package:ecommerce_customer_app/screen/intro/IntroScreen.dart';
 import 'package:flutter/material.dart';
 
 import '../../constants.dart';
+import '../../size_config.dart';
 
 class MySplashScreen extends StatefulWidget {
   static String routeName = "/splash";
@@ -31,6 +32,7 @@ class _SplashState extends State<MySplashScreen> {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return Container(
         color: SPLASH_BACK,
         child: Image.asset("assets/images/splash_icon.png"));
