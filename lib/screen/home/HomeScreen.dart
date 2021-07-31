@@ -24,7 +24,7 @@ class _StateHomeScreen  extends State<HomeScreen>{
   void initState() {
     // TODO: implement initState
     super.initState();
-    productBloc..getProducts("id,desc",0,6);
+  //  productBloc..getProducts("id,desc",0,6);
   }
 
   Future _refresh() async{

@@ -17,12 +17,14 @@ class PopularProducts extends StatefulWidget{
 
 class _PopularProductsState extends State<PopularProducts> {
 
+  late int _page;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    productBloc..getProducts("id,desc",1,6);
+    _page=0;
+    productBloc..getProducts("id,desc",_page,6);
   }
   @override
   Widget build(BuildContext context) {
