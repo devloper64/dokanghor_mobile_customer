@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget{
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: "Dokanghor",
+      title: "DokanGhor",
       theme: theme(),
       initialRoute: MySplashScreen.routeName,
       routes: routes,

@@ -1,3 +1,4 @@
+import 'package:ecommerce_customer_app/screen/details/details_screen.dart';
 import 'package:ecommerce_customer_app/screen/home/HomeScreen.dart';
 import 'package:ecommerce_customer_app/screen/intro/IntroScreen.dart';
 import 'package:ecommerce_customer_app/screen/splash/SplashScreen.dart';
@@ -10,4 +11,5 @@ final Map<String, WidgetBuilder> routes = {
   MySplashScreen.routeName: (context) => MySplashScreen(),
   IntroScreen.routeName: (context) => IntroScreen(),
   HomeScreen.routeName: (context) => HomeScreen(),
+  DetailsScreen.routeName: (context) => DetailsScreen(),
 };

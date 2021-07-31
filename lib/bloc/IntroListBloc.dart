@@ -1,5 +1,5 @@
 
-import 'package:ecommerce_customer_app/model/reponse/intro/IntroResponse.dart';
+import 'package:ecommerce_customer_app/model/response/intro/IntroResponse.dart';
 import 'package:ecommerce_customer_app/repository/AppRepository.dart';
 import 'package:rxdart/rxdart.dart';
 
