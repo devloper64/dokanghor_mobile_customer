@@ -10,11 +10,11 @@ class ProductDescription extends StatelessWidget {
   const ProductDescription({
     Key? key,
     required this.product,
-    required this.pressOnSeeMore,
+    required this.pressOnFeedBack,
   }) : super(key: key);
 
   final Product product;
-  final GestureTapCallback pressOnSeeMore;
+  final GestureTapCallback pressOnFeedBack;
 
   @override
   Widget build(BuildContext context) {
@@ -50,15 +50,55 @@ class ProductDescription extends StatelessWidget {
             ),
           ),
         ),
-        Padding(
-          padding: EdgeInsets.only(
-            left: getProportionateScreenWidth(20),
-            right: getProportionateScreenWidth(64),
-          ),
-          child: Text(
-            product.name!,
-            maxLines: 3,
-          ),
+
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: EdgeInsets.only(
+                left: getProportionateScreenWidth(20),
+                right: getProportionateScreenWidth(64),
+              ),
+              child: Text(
+                "Brand:"+product.productDetails!.brand!,
+                maxLines: 3,
+              ),
+
+            ),
+            Padding(
+              padding: EdgeInsets.only(
+                left: getProportionateScreenWidth(20),
+                right: getProportionateScreenWidth(64),
+              ),
+              child: Text(
+                product.productDetails!.style!.replaceAll(new RegExp(r"\s+"), "").replaceAll("->", "\n"),
+                maxLines: 3,
+              ),
+
+            ),
+            Padding(
+              padding: EdgeInsets.only(
+                left: getProportionateScreenWidth(20),
+                right: getProportionateScreenWidth(64),
+              ),
+              child: Text(
+                "Size:"+product.productDetails!.size_mesaurments!,
+                maxLines: 3,
+              ),
+
+            ),
+            Padding(
+              padding: EdgeInsets.only(
+                left: getProportionateScreenWidth(20),
+                right: getProportionateScreenWidth(64),
+              ),
+              child: Text(
+                product.productDetails!.size_details!.replaceAll(new RegExp(r"\s+"), "").replaceAll("->", "\n"),
+                maxLines: 3,
+              ),
+
+            ),
+          ],
         ),
         Padding(
           padding: EdgeInsets.symmetric(
@@ -70,7 +110,7 @@ class ProductDescription extends StatelessWidget {
             child: Row(
               children: [
                 Text(
-                  "See More Detail",
+                  "See Product Feed Back",
                   style: TextStyle(
                       fontWeight: FontWeight.w600, color: kPrimaryColor),
                 ),

@@ -22,6 +22,8 @@ final headingStyle = TextStyle(
   height: 1.5,
 );
 
+late int productPage=0;
+
 const defaultDuration = Duration(milliseconds: 250);
 
 // Form Error

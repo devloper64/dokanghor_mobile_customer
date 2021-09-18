@@ -5,6 +5,8 @@ import 'package:ecommerce_customer_app/model/response/intro/IntroResponse.dart';
 import 'package:ecommerce_customer_app/model/response/product/Product.dart';
 import 'package:ecommerce_customer_app/model/response/product_image/ProductImageResponse.dart';
 
+import '../constants.dart';
+
 class AppRepository{
 
   static String baseUrl="https://dokanghor.herokuapp.com/api";
@@ -29,7 +31,6 @@ class AppRepository{
 
 
   Future <List<Product>> getProducts(String sort,int page,int size) async{
-
     Response response = await _dio.get(productsList+"?sort=$sort&page=$page&size=$size");
     if(response.statusCode==200){
       print("get product Api Success");
@@ -41,6 +42,20 @@ class AppRepository{
       throw Exception('Failed to load jobs from API $code');
     }
   }
+
+  Future <List<Product>> getSearchProducts(String sort,String query) async{
+    Response response = await _dio.get(productsList+"?sort=$sort&name.contains=$query");
+    if(response.statusCode==200){
+      print("get product Search Api Success");
+      return (response.data as List)
+          .map((value) => Product.fromJson(value))
+          .toList();
+    }else{
+      var code=response.statusCode;
+      throw Exception('Failed to load jobs from API $code');
+    }
+  }
+
 
   Future <List<ProductImageResponse>> getProductImages(int productId) async{
 

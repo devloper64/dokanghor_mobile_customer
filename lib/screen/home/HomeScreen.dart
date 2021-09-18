@@ -29,7 +29,7 @@ class _StateHomeScreen  extends State<HomeScreen>{
 
   Future _refresh() async{
     await Future.delayed(Duration(seconds: 3));
-    productBloc..getProducts("id,desc",0,6);
+    productBloc..getProducts("id,desc",0,6,true);
     setState(() {});
   }
 

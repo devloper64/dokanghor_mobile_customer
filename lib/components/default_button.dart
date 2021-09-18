@@ -10,7 +10,7 @@ class DefaultButton extends StatelessWidget {
     required this.press,
   }) : super(key: key);
   final String text;
-  final Function press;
+  final VoidCallback press;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class DefaultButton extends StatelessWidget {
       child: FlatButton(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         color: kPrimaryColor,
-        onPressed: (){},
+        onPressed: press,
         child: Text(
           text,
           style: TextStyle(
