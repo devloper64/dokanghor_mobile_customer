@@ -4,8 +4,7 @@ import 'package:ecommerce_customer_app/components/product_card.dart';
 import 'package:ecommerce_customer_app/model/response/product/Product.dart';
 import 'package:ecommerce_customer_app/screen/home/components/section_title_without_see_more.dart';
 import 'package:flutter/material.dart';
-
-import '../../../constants.dart';
+import '../../../golbal.dart';
 import '../../../size_config.dart';
 
 class PopularProducts extends StatefulWidget {

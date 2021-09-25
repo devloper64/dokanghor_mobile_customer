@@ -13,4 +13,15 @@ class SharedPrefsHelper{
     return pref.getBool('firstTime') ?? false;
   }
 
+
+  static void storeFcmToken(String token) async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    pref.setString('fcm', token);
+  }
+
+  static Future<String> getFcmToken() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    return pref.getString('fcm') ?? "";
+  }
+
 }

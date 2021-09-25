@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:ecommerce_customer_app/size_config.dart';
 
+import 'SharedPrefsHelper.dart';
+
 const kPrimaryColor = Color(0xffDB3022);
 const kPrimaryLightColor = Color(0xFFFFECDF);
 const WHITE =  Color(0xfffffcfa);
@@ -22,9 +24,15 @@ final headingStyle = TextStyle(
   height: 1.5,
 );
 
-late int productPage=0;
+
 
 const defaultDuration = Duration(milliseconds: 250);
+
+Future<String> fcmToken() async {
+  String token = await SharedPrefsHelper.getFcmToken();
+  return token;
+}
+
 
 // Form Error
 final RegExp emailValidatorRegExp =

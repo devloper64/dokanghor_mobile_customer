@@ -40,6 +40,7 @@ class _SplashState extends State<MySplashScreen> {
 
     _messaging.getToken().then((value) {
       print(value);
+      SharedPrefsHelper.storeFcmToken(value!);
     });
 
     FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);

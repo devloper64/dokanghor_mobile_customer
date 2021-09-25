@@ -1,7 +1,7 @@
 import 'package:ecommerce_customer_app/bloc/ProductListBloc.dart';
 import 'package:flutter/material.dart';
 
-import '../../../constants.dart';
+import '../../../golbal.dart';
 import '../../../size_config.dart';
 import 'categories.dart';
 import 'discount_banner.dart';
