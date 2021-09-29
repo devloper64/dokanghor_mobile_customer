@@ -10,7 +10,7 @@ import 'package:ecommerce_customer_app/screen/profile/profile_screen.dart';
 import 'package:ecommerce_customer_app/screen/search/SearchScreen.dart';
 import 'package:ecommerce_customer_app/screen/sign_in/sign_in_screen.dart';
 import 'package:ecommerce_customer_app/screen/sign_up/sign_up_screen.dart';
-import 'package:ecommerce_customer_app/screen/signup_success/login_success_screen.dart';
+import 'package:ecommerce_customer_app/screen/signup_success/SignUpSuccessScreen.dart';
 import 'package:ecommerce_customer_app/screen/splash/SplashScreen.dart';
 import 'package:flutter/widgets.dart';
 

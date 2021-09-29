@@ -24,4 +24,15 @@ class SharedPrefsHelper{
     return pref.getString('fcm') ?? "";
   }
 
+  static void storeUserToken(String token) async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    pref.setString('token', token);
+  }
+
+  static Future<String> getUserToken() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    return pref.getString('token') ?? "";
+  }
+
+
 }

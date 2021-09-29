@@ -35,11 +35,11 @@ class DioExceptions implements Exception {
       case 400:
         return error["title"];
       case 404:
-        return error["message"];
+        return error["title"];
       case 500:
         return 'Internal server error';
       case 401:
-         return error["message"];
+         return error["title"];
       default:
         return 'Oops something went wrong';
     }

@@ -10,30 +10,32 @@ class Product {
     String? lastModifiedDate;
     String? name;
     double? price;
-    ProductDetails? productDetails;
+    ProductDetails? productDetailsResponse;
     int? productTypeId;
     double? quantity;
     int? subCategoryId;
     String? subCategoryName;
+    int? userId;
 
-    Product({required this.createdBy, required this.createdDate, required this.discount_amount, required this.id, required this.image, required this.lastModifiedBy, required this.lastModifiedDate, required this.name, required this.price, this.productDetails, required this.productTypeId, required this.quantity, required this.subCategoryId, required this.subCategoryName});
+    Product({this.createdBy, this.createdDate, this.discount_amount, this.id, this.image, this.lastModifiedBy, this.lastModifiedDate, this.name, this.price, this.productDetailsResponse, this.productTypeId, this.quantity, this.subCategoryId, this.subCategoryName, this.userId});
 
     factory Product.fromJson(Map<String, dynamic> json) {
         return Product(
             createdBy: json['createdBy'], 
             createdDate: json['createdDate'], 
-            discount_amount: json['discount_amount'], 
+            discount_amount: double.parse(json['discount_amount'].toString()),
             id: json['id'], 
             image: json['image'], 
             lastModifiedBy: json['lastModifiedBy'], 
             lastModifiedDate: json['lastModifiedDate'], 
             name: json['name'], 
-            price: json['price'], 
-            productDetails: json['productDetails'] != null ? ProductDetails?.fromJson(json['productDetails']) : null, 
+            price: double.parse(json['price'].toString()),
+            productDetailsResponse: json['productDetailsResponse'] != null ? ProductDetails.fromJson(json['productDetailsResponse']) : null,
             productTypeId: json['productTypeId'], 
-            quantity: json['quantity'], 
+            quantity: double.parse(json['quantity'].toString()),
             subCategoryId: json['subCategoryId'], 
             subCategoryName: json['subCategoryName'], 
+            userId: json['userId'],
         );
     }
 
@@ -52,8 +54,11 @@ class Product {
         data['quantity'] = this.quantity;
         data['subCategoryId'] = this.subCategoryId;
         data['subCategoryName'] = this.subCategoryName;
-        if (this.productDetails != null) {
-            data['productDetails'] = this.productDetails!.toJson();
+        if (this.productDetailsResponse != null) {
+            data['productDetailsResponse'] = this.productDetailsResponse!.toJson();
+        }
+        if (this.userId != null) {
+            data['userId'] = this.userId;
         }
         return data;
     }

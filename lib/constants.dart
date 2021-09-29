@@ -14,6 +14,7 @@ const kPrimaryGradientColor = LinearGradient(
 );
 const kSecondaryColor = Color(0xFF979797);
 const kTextColor = Color(0xFF757575);
+const Stroke = Color(0xFFF0EDED);
 
 const kAnimationDuration = Duration(milliseconds: 200);
 
@@ -28,10 +29,7 @@ final headingStyle = TextStyle(
 
 const defaultDuration = Duration(milliseconds: 250);
 
-Future<String> fcmToken() async {
-  String token = await SharedPrefsHelper.getFcmToken();
-  return token;
-}
+
 
 
 // Form Error

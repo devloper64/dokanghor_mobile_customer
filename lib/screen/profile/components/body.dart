@@ -1,12 +1,23 @@
+import 'dart:async';
+
+import 'package:ecommerce_customer_app/SharedPrefsHelper.dart';
+import 'package:ecommerce_customer_app/bloc/auth_bloc.dart';
 import 'package:ecommerce_customer_app/screen/sign_in/sign_in_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'profile_menu.dart';
 import 'profile_pic.dart';
 
 class Body extends StatelessWidget {
+
+  Body({required this.token});
+  final String token;
+
   @override
   Widget build(BuildContext context) {
+    var authBloc = Provider.of<AuthBloc>(context);
     return SingleChildScrollView(
       padding: EdgeInsets.symmetric(vertical: 20),
       child: Column(
@@ -34,9 +45,13 @@ class Body extends StatelessWidget {
             press: () {},
           ),
           ProfileMenu(
-            text: "Login",
+            text: token.isEmpty?"Login":"Logout",
             icon: "assets/icons/Log out.svg",
             press: () {
+              if(token.isNotEmpty){
+                SharedPrefsHelper.storeUserToken("");
+                authBloc.logout();
+              }
               Navigator.pushNamed(context, SignInScreen.routeName);
             },
           ),

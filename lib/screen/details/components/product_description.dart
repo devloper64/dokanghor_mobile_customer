@@ -60,7 +60,7 @@ class ProductDescription extends StatelessWidget {
                 right: getProportionateScreenWidth(64),
               ),
               child: Text(
-                "Brand:"+product.productDetails!.brand!,
+                "Brand:"+product.productDetailsResponse!.brand!,
                 maxLines: 3,
               ),
 
@@ -70,8 +70,26 @@ class ProductDescription extends StatelessWidget {
                 left: getProportionateScreenWidth(20),
                 right: getProportionateScreenWidth(64),
               ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  ...List.generate(
+                    product.productDetailsResponse!.styles!.length,
+                        (index) {
+                        return getStringFromArray( product.productDetailsResponse!.styles![index]);
+                    },
+                  ),
+                ],
+              )
+
+            ),
+            Padding(
+              padding: EdgeInsets.only(
+                left: getProportionateScreenWidth(20),
+                right: getProportionateScreenWidth(64),
+              ),
               child: Text(
-                product.productDetails!.style!.replaceAll(new RegExp(r"\s+"), "").replaceAll("->", "\n"),
+                "Size:"+product.productDetailsResponse!.size_mesaurments!,
                 maxLines: 3,
               ),
 
@@ -81,21 +99,17 @@ class ProductDescription extends StatelessWidget {
                 left: getProportionateScreenWidth(20),
                 right: getProportionateScreenWidth(64),
               ),
-              child: Text(
-                "Size:"+product.productDetails!.size_mesaurments!,
-                maxLines: 3,
-              ),
-
-            ),
-            Padding(
-              padding: EdgeInsets.only(
-                left: getProportionateScreenWidth(20),
-                right: getProportionateScreenWidth(64),
-              ),
-              child: Text(
-                product.productDetails!.size_details!.replaceAll(new RegExp(r"\s+"), "").replaceAll("->", "\n"),
-                maxLines: 3,
-              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  ...List.generate(
+                    product.productDetailsResponse!.size_details!.length,
+                        (index) {
+                      return getStringFromArray( product.productDetailsResponse!.size_details![index]);
+                    },
+                  ),
+                ],
+              )
 
             ),
           ],
@@ -127,4 +141,13 @@ class ProductDescription extends StatelessWidget {
       ],
     );
   }
+
+  Widget getStringFromArray(String value){
+    return Text(
+      value,
+      maxLines: 3,
+    );
+  }
+
+
 }

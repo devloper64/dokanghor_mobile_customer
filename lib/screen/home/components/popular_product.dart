@@ -50,7 +50,7 @@ class _PopularProductsState extends State<PopularProducts> {
   }
 
   Widget _buildProductWidget(List<Product> data) {
-    return Column(
+    return data.isNotEmpty?Column(
       children: [
         Padding(
           padding:
@@ -85,6 +85,6 @@ class _PopularProductsState extends State<PopularProducts> {
               }
             }),
       ],
-    );
+    ):LoadingWidget.buildLoadingWidget();
   }
 }

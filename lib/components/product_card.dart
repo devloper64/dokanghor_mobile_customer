@@ -35,10 +35,10 @@ class ProductCard extends StatelessWidget {
               AspectRatio(
                 aspectRatio: 1.68,
                 child: Container(
-                  padding: EdgeInsets.all(getProportionateScreenWidth(20)),
+                  padding: EdgeInsets.all(getProportionateScreenWidth(5)),
                   decoration: BoxDecoration(
                     color: kSecondaryColor.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(15),
+                    borderRadius: BorderRadius.circular(5),
                   ),
                   child: Hero(
                     tag: product.id.toString(),

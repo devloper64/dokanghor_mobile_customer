@@ -1,35 +1,41 @@
 class ProductDetails {
     String? brand;
-    String? color;
+    List<String>? colors;
     String? gender;
     int? id;
-    String? size_details;
+    List<String>? size_details;
     String? size_mesaurments;
-    String? style;
+    List<String>? styles;
 
-    ProductDetails({this.brand, this.color, this.gender, this.id, this.size_details, this.size_mesaurments, this.style});
+    ProductDetails({this.brand, this.colors, this.gender, this.id, this.size_details, this.size_mesaurments, this.styles});
 
     factory ProductDetails.fromJson(Map<String, dynamic> json) {
         return ProductDetails(
             brand: json['brand'], 
-            color: json['color'], 
+            colors: json['colors'] != null ? new List<String>.from(json['colors']) : null, 
             gender: json['gender'], 
             id: json['id'], 
-            size_details: json['size_details'], 
+            size_details: json['size_details'] != null ? new List<String>.from(json['size_details']) : null, 
             size_mesaurments: json['size_mesaurments'], 
-            style: json['style'], 
+            styles: json['styles'] != null ? new List<String>.from(json['styles']) : null, 
         );
     }
 
     Map<String, dynamic> toJson() {
         final Map<String, dynamic> data = new Map<String, dynamic>();
         data['brand'] = this.brand;
-        data['color'] = this.color;
         data['gender'] = this.gender;
         data['id'] = this.id;
-        data['size_details'] = this.size_details;
         data['size_mesaurments'] = this.size_mesaurments;
-        data['style'] = this.style;
+        if (this.colors != null) {
+            data['colors'] = this.colors;
+        }
+        if (this.size_details != null) {
+            data['size_details'] = this.size_details;
+        }
+        if (this.styles != null) {
+            data['styles'] = this.styles;
+        }
         return data;
     }
 }

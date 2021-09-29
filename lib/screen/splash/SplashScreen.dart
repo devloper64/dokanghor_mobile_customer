@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:ui';
 import 'package:ecommerce_customer_app/SharedPrefsHelper.dart';
+import 'package:ecommerce_customer_app/bloc/NotificationBloc.dart';
 import 'package:ecommerce_customer_app/model/PushNotification.dart';
 import 'package:ecommerce_customer_app/screen/home/HomeScreen.dart';
 import 'package:ecommerce_customer_app/screen/intro/IntroScreen.dart';
@@ -67,22 +68,9 @@ class _SplashState extends State<MySplashScreen> {
           dataTitle: message.data['title'],
           dataBody: message.data['body'],
         );
+        notificationBloc..notification(notification);
 
-        setState(() {
-          _notificationInfo = notification;
-          _totalNotifications++;
-        });
 
-        if (_notificationInfo != null) {
-          // For displaying the notification as an overlay
-          showSimpleNotification(
-            Text(_notificationInfo!.title!),
-            leading: NotificationBadge(totalNotifications: _totalNotifications),
-            subtitle: Text(_notificationInfo!.body!),
-            background: Colors.cyan.shade700,
-            duration: Duration(seconds: 2),
-          );
-        }
       });
     } else {
       print('User declined or has not accepted permission');
@@ -133,7 +121,7 @@ class _SplashState extends State<MySplashScreen> {
         _totalNotifications++;
       });
     });
-    Timer(Duration(seconds: 5), () async {
+    Timer(Duration(seconds: 3), () async {
       bool isFirstTimeOpen = await SharedPrefsHelper.getFirstTimeOpenStatus();
       if (!isFirstTimeOpen) {
         Navigator.pushReplacementNamed(context, IntroScreen.routeName);
@@ -156,6 +144,7 @@ class _SplashState extends State<MySplashScreen> {
         child: Image.asset("assets/images/splash_icon.png"));
   }
 }
+
 
 class NotificationBadge extends StatelessWidget {
   final int totalNotifications;

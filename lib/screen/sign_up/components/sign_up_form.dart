@@ -4,14 +4,16 @@ import 'package:ecommerce_customer_app/components/custom_surfix_icon.dart';
 import 'package:ecommerce_customer_app/components/default_button.dart';
 import 'package:ecommerce_customer_app/components/form_error.dart';
 import 'package:ecommerce_customer_app/helper/StreamListenableBuilder.dart';
+import 'package:ecommerce_customer_app/helper/keyboard.dart';
 import 'package:ecommerce_customer_app/model/body/sign-up/SignUpBody.dart';
 import 'package:ecommerce_customer_app/model/response/sign-up/SignUpCustom.dart';
 import 'package:ecommerce_customer_app/screen/complete_profile/complete_profile_screen.dart';
-import 'package:ecommerce_customer_app/screen/signup_success/login_success_screen.dart';
+import 'package:ecommerce_customer_app/screen/signup_success/SignUpSuccessScreen.dart';
 import 'package:flutter/material.dart';
 
 
 import '../../../constants.dart';
+import '../../../golbal.dart';
 import '../../../size_config.dart';
 
 
@@ -87,6 +89,7 @@ class _SignUpFormState extends State<SignUpForm> {
       press: () {
         if (_formKey.currentState!.validate()) {
           _formKey.currentState!.save();
+          KeyboardUtil.hideKeyboard(context);
           fcmToken().then((fcmToken) => {
             registerBloc..register(SignUpBody(activated: true, email: email, fcmToken: fcmToken, firstName: firstName, imageUrl: "", langKey: "en", lastName: lastName, login: email, password: password, phone: phoneNumber))
           });
@@ -277,4 +280,7 @@ class _SignUpFormState extends State<SignUpForm> {
       ),
     );
   }
+
+
+
 }

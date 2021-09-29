@@ -25,7 +25,7 @@ class _BodyState  extends State<Body> {
     // TODO: implement initState
     super.initState();
     productPage=0;
-    productBloc..getProducts("id,desc",productPage,6,false);
+    productBloc..getProducts("id,desc",productPage,30,true);
     _scrollController.addListener(() {
       if (_scrollController.position.pixels == _scrollController.position.maxScrollExtent) {
         productPage++;
@@ -35,7 +35,7 @@ class _BodyState  extends State<Body> {
   }
 
   Future _fetch() async{
-    productBloc..getProducts("id,desc",productPage,6,false);
+    productBloc..getProducts("id,desc",productPage,30,false);
   }
 
 

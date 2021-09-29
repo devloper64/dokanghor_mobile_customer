@@ -25,11 +25,12 @@ class _StateHomeScreen  extends State<HomeScreen>{
     // TODO: implement initState
     super.initState();
   //  productBloc..getProducts("id,desc",0,6);
+    productBloc.drainStream();
   }
 
   Future _refresh() async{
     await Future.delayed(Duration(seconds: 3));
-    productBloc..getProducts("id,desc",0,6,true);
+    productBloc..getProducts("id,desc",0,30,true);
     setState(() {});
   }
 

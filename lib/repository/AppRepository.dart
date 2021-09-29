@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:ecommerce_customer_app/model/body/gmaillogin/GmailLoginBody.dart';
 import 'package:ecommerce_customer_app/model/body/login/LoginBody.dart';
 import 'package:ecommerce_customer_app/model/body/sign-up/SignUpBody.dart';
 import 'package:ecommerce_customer_app/model/response/intro/IntroResponse.dart';
@@ -22,7 +23,7 @@ class AppRepository{
   var productImages= '$baseUrl/product_images_by_product_id';
   var registerUrl= '$baseUrl/register';
   var loginUrl= '$baseUrl/authenticate';
-
+  var gmailLoginUrl= '$baseUrl/gmail-login';
 
 
   Future <List<IntroResponse>> getIntros() async{
@@ -109,7 +110,7 @@ class AppRepository{
 
     try{
       Response response = await _dio.post(loginUrl,data: loginBody.toJson());
-      return LoginResponse.fromJson(json.decode(response.data));
+      return LoginResponse.fromJson(response.data);
     }catch(e){
       final errorMessage = DioExceptions.fromDioError(e as DioError).toString();
       print(errorMessage);
@@ -118,7 +119,29 @@ class AppRepository{
           toastLength: Toast.LENGTH_SHORT,
           gravity: ToastGravity.BOTTOM);
 
-      return LoginResponse(id_token: "Token Fetch failed");
+      return LoginResponse(id_token: "");
+
+    }
+
+
+  }
+
+
+  Future<LoginResponse> loginGmail(GmailLoginBody gmailLoginBody) async{
+
+    try{
+      Response response = await _dio.post(gmailLoginUrl,data: gmailLoginBody.toJson());
+      return LoginResponse.fromJson(response.data);
+    }catch(e){
+      final errorMessage = DioExceptions.fromDioError(e as DioError).toString();
+      print(errorMessage);
+      Fluttertoast.showToast(
+          msg: errorMessage,
+          toastLength: Toast.LENGTH_SHORT,
+          gravity: ToastGravity.BOTTOM);
+
+      return LoginResponse(id_token: "");
+
     }
 
 

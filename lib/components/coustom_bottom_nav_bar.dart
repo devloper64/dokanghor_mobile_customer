@@ -1,3 +1,4 @@
+import 'package:ecommerce_customer_app/bloc/ProductListBloc.dart';
 import 'package:ecommerce_customer_app/screen/home/HomeScreen.dart';
 import 'package:ecommerce_customer_app/screen/profile/profile_screen.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +7,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import '../constants.dart';
 import '../enums.dart';
+import '../golbal.dart';
 
 class CustomBottomNavBar extends StatelessWidget {
   const CustomBottomNavBar({
@@ -46,8 +48,9 @@ class CustomBottomNavBar extends StatelessWidget {
                       ? kPrimaryColor
                       : inActiveIconColor,
                 ),
-                onPressed: () =>
-                    Navigator.pushNamed(context, HomeScreen.routeName),
+                onPressed: () =>{
+                  Navigator.pushNamed(context, HomeScreen.routeName),
+                }
               ),
               IconButton(
                 icon: SvgPicture.asset("assets/icons/Heart Icon.svg"),
