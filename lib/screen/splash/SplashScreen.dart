@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:ui';
 import 'package:ecommerce_customer_app/SharedPrefsHelper.dart';
+import 'package:ecommerce_customer_app/bloc/CategoryListBloc.dart';
 import 'package:ecommerce_customer_app/bloc/NotificationBloc.dart';
 import 'package:ecommerce_customer_app/model/PushNotification.dart';
 import 'package:ecommerce_customer_app/screen/home/HomeScreen.dart';

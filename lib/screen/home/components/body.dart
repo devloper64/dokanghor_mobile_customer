@@ -1,10 +1,12 @@
+import 'package:ecommerce_customer_app/bloc/CategoryListBloc.dart';
 import 'package:ecommerce_customer_app/bloc/ProductListBloc.dart';
 import 'package:flutter/material.dart';
 
 import '../../../golbal.dart';
 import '../../../size_config.dart';
+import 'banner/BannerBody.dart';
 import 'categories.dart';
-import 'discount_banner.dart';
+import 'banner/discount_banner.dart';
 import 'home_header.dart';
 import 'popular_product.dart';
 import 'special_offers.dart';
@@ -32,6 +34,9 @@ class _BodyState  extends State<Body> {
          _fetch();
       }
     });
+    categoryListBloc.drainStream();
+    categoryListBloc..getCategoryList("id,asc",0,4,true);
+
   }
 
   Future _fetch() async{
@@ -49,10 +54,9 @@ class _BodyState  extends State<Body> {
              SizedBox(height: getProportionateScreenHeight(20)),
              HomeHeader(),
              SizedBox(height: getProportionateScreenWidth(10)),
-             DiscountBanner(),
+             BannerBody(),
              Categories(),
-             SpecialOffers(),
-             SizedBox(height: getProportionateScreenWidth(30)),
+             SizedBox(height: getProportionateScreenWidth(15)),
              PopularProducts(),
              SizedBox(height: getProportionateScreenWidth(30)),
            ],

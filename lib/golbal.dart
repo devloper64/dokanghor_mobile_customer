@@ -11,3 +11,8 @@ Future<String> getUserToken() async {
   String token = await SharedPrefsHelper.getUserToken();
   return token;
 }
+
+//product cart
+String globalSize="";
+String globalColor="";
+String globalQuantity="";

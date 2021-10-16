@@ -19,7 +19,7 @@ class NotificationBloc{
       leading: NotificationBadge(totalNotifications: 1),
       subtitle: Text(pushNotification.body!.isNotEmpty?pushNotification.body!:pushNotification.dataBody!),
       background: kPrimaryColor,
-      duration: Duration(seconds: 5),
+      duration: Duration(seconds: 10),
     );
   }
   dispose() {

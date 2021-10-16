@@ -1,3 +1,5 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:ecommerce_customer_app/components/LoadingWidget.dart';
 import 'package:ecommerce_customer_app/model/response/product/Product.dart';
 import 'package:ecommerce_customer_app/screen/details/details_screen.dart';
 import 'package:flutter/material.dart';
@@ -42,10 +44,15 @@ class ProductCard extends StatelessWidget {
                   ),
                   child: Hero(
                     tag: product.id.toString(),
-                    child: Image.network(product.image!),
+                    child:  CachedNetworkImage(
+                      imageUrl: product.image!,
+                      placeholder: (context, url) => LoadingWidget.buildLoadingWidget(),
+                      errorWidget: (context, url, error) => Image.asset("assets/images/splash_icon.png"),
+                    ),
                   ),
                 ),
               ),
+          //  Image.asset("assets/images/splash_icon.png")
               const SizedBox(height: 10),
               Text(
                 product.name!,

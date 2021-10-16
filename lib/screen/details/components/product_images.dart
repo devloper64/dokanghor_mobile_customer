@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ecommerce_customer_app/bloc/ProductImagesListBloc.dart';
 import 'package:ecommerce_customer_app/components/LoadingWidget.dart';
 import 'package:ecommerce_customer_app/model/response/product/Product.dart';
@@ -37,29 +38,40 @@ class _ProductImagesState extends State<ProductImages> {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<List<ProductImageResponse>>(
-        stream: productImageBloc.subject.stream,
-        builder: (context, AsyncSnapshot<List<ProductImageResponse>> snapshot) {
-            if (snapshot.hasData) {
-              if(snapshot.data!.isNotEmpty){
-                return _buildWidget(snapshot.data!);
-              }
-              else{
-                  List<ProductImageResponse> list=[];
-                  ProductImageResponse productImageResponse=ProductImageResponse(id: widget.product.id, image:  widget.product.image, productId:  widget.product.id);
-                  list.add(productImageResponse);
-                  return _buildWidget(list);
+    return  StreamBuilder<bool>(
+        stream: productImageBloc.isLoading,
+        builder: (context, AsyncSnapshot<bool> snapshot) {
 
-              }
-            }else if(!snapshot.hasData){
-              return LoadingWidget.buildLoadingWidget();
-            }
-            else{
-              return LoadingWidget.buildLoadingWidget();
-            }
+          if(snapshot.data==true){
+            return LoadingWidget.buildLoadingWidget();
+          }else{
+            return   StreamBuilder<List<ProductImageResponse>>(
+                stream: productImageBloc.subject.stream,
+                builder: (context, AsyncSnapshot<List<ProductImageResponse>> snapshot) {
+                  if (snapshot.hasData) {
+                    if(snapshot.data!.isNotEmpty){
+                      return _buildWidget(snapshot.data!);
+                    }
+                    else{
+                      List<ProductImageResponse> list=[];
+                      ProductImageResponse productImageResponse=ProductImageResponse(id: widget.product.id, image:  widget.product.image, productId:  widget.product.id);
+                      list.add(productImageResponse);
+                      return _buildWidget(list);
+
+                    }
+                  }
+                  else{
+                    return LoadingWidget.buildLoadingWidget();
+                  }
+                }
+
+            );
           }
 
-    );
+        });
+
+
+
   }
 
   Widget _buildWidget(List<ProductImageResponse> list){
@@ -71,7 +83,10 @@ class _ProductImagesState extends State<ProductImages> {
             aspectRatio: 1,
             child: Hero(
               tag: widget.product.id.toString(),
-              child: Image.network(list[selectedImage].image!),
+              child: CachedNetworkImage(
+                imageUrl: list[selectedImage].image!,
+                errorWidget: (context, url, error) => Image.asset("assets/images/splash_icon.png"),
+              ),
             ),
           ),
         ),
@@ -108,7 +123,10 @@ class _ProductImagesState extends State<ProductImages> {
           border: Border.all(
               color: kPrimaryColor.withOpacity(selectedImage == index ? 1 : 0)),
         ),
-        child: Image.network(list[index].image!),
+        child: CachedNetworkImage(
+          imageUrl: list[index].image!,
+          errorWidget: (context, url, error) => Image.asset("assets/images/splash_icon.png"),
+        ),
       ),
     );
   }

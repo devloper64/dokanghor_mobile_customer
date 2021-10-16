@@ -15,8 +15,10 @@ const kPrimaryGradientColor = LinearGradient(
 const kSecondaryColor = Color(0xFF979797);
 const kTextColor = Color(0xFF757575);
 const Stroke = Color(0xFFF0EDED);
-
+const CategoryBack = Color(0xFFf7cecb);
 const kAnimationDuration = Duration(milliseconds: 200);
+
+const AllCategoryBack = Color(0xFFebebeb);
 
 final headingStyle = TextStyle(
   fontSize: getProportionateScreenWidth(28),
@@ -36,6 +38,7 @@ const defaultDuration = Duration(milliseconds: 250);
 final RegExp emailValidatorRegExp =
     RegExp(r"^[a-zA-Z0-9.]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
 const String kEmailNullError = "Please Enter your email";
+const String kPhoneNullError = "Please Enter your phone";
 const String kInvalidEmailError = "Please Enter Valid Email";
 const String kPassNullError = "Please Enter your password";
 const String kShortPassError = "Password is too short";

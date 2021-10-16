@@ -9,6 +9,7 @@ import 'package:ecommerce_customer_app/helper/StreamListenableBuilder.dart';
 import 'package:ecommerce_customer_app/model/body/gmaillogin/GmailLoginBody.dart';
 import 'package:ecommerce_customer_app/model/response/login/LoginResponse.dart';
 import 'package:ecommerce_customer_app/screen/login_success/login_success_screen.dart';
+import 'package:ecommerce_customer_app/screen/phone_sign_in/phone_sign_in_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -28,7 +29,6 @@ class Body extends StatefulWidget {
 class _StateBody extends State<Body>{
 
   late StreamSubscription<User?> loginStateSubscription;
-
   @override
   void initState() {
     gmailLoginBloc..drain();
@@ -49,8 +49,7 @@ class _StateBody extends State<Body>{
       child: SizedBox(
         width: double.infinity,
         child: Padding(
-          padding:
-          EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
+          padding: EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
           child: SingleChildScrollView(
             child: Column(
               children: [
@@ -100,7 +99,7 @@ class _StateBody extends State<Body>{
                                   SocalCard(
                                     icon: "assets/icons/smartphone.svg",
                                     press: () {
-
+                                      Navigator.pushNamed(context, PhoneSignInScreen.routeName);
                                     },
                                   ),
                                 ],

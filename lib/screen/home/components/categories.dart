@@ -1,18 +1,43 @@
+import 'package:ecommerce_customer_app/bloc/CategoryListBloc.dart';
+import 'package:ecommerce_customer_app/screen/home/components/CategoryCard.dart';
+import 'package:ecommerce_customer_app/components/LoadingWidget.dart';
+import 'package:ecommerce_customer_app/model/response/category/CategoryListResponse.dart';
+import 'package:ecommerce_customer_app/screen/categories/AllCategoriesScreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../../constants.dart';
 import '../../../size_config.dart';
 
 class Categories extends StatelessWidget {
+
+
   @override
   Widget build(BuildContext context) {
-    List<Map<String, dynamic>> categories = [
-      {"icon": "assets/icons/Flash Icon.svg", "text": "Flash Deal"},
-      {"icon": "assets/icons/Bill Icon.svg", "text": "Bill"},
-      {"icon": "assets/icons/Game Icon.svg", "text": "Game"},
-      {"icon": "assets/icons/Gift Icon.svg", "text": "Daily Gift"},
-      {"icon": "assets/icons/Discover.svg", "text": "More"},
-    ];
+    bool zeroFound=false;
+    List<CategoryListResponse> data=[];
+    return StreamBuilder<List<CategoryListResponse>>(
+        stream: categoryListBloc.subject.stream,
+        builder: (context, AsyncSnapshot<List<CategoryListResponse>> snapshot) {
+          if (snapshot.hasData) {
+            data.clear();
+            data = snapshot.data!;
+            data.forEach((element) {
+              if(element.id==0){
+                zeroFound=true;
+              }
+            });
+            if(!zeroFound){
+              data.insert(data.length, new CategoryListResponse(id: 0, name: "more", image: "not Found"));
+            }
+            return body(data,context);
+          } else {
+            return Container();
+          }
+        });
+  }
+
+  Widget body(List<CategoryListResponse> categories,BuildContext context) {
     return Padding(
       padding: EdgeInsets.all(getProportionateScreenWidth(20)),
       child: Row(
@@ -21,9 +46,16 @@ class Categories extends StatelessWidget {
         children: List.generate(
           categories.length,
           (index) => CategoryCard(
-            icon: categories[index]["icon"],
-            text: categories[index]["text"],
-            press: () {},
+            icon: categories[index].image!,
+            text: categories[index].name!,
+            id: categories[index].id!,
+            press: () {
+              if(categories[index].id==0){
+                Navigator.pushNamed(context, AllCategoriesScreen.routeName);
+              }else{
+                print("Action");
+              }
+            },
           ),
         ),
       ),
@@ -31,40 +63,4 @@ class Categories extends StatelessWidget {
   }
 }
 
-class CategoryCard extends StatelessWidget {
-  const CategoryCard({
-    Key? key,
-    required this.icon,
-    required this.text,
-    required this.press,
-  }) : super(key: key);
 
-  final String icon, text;
-  final GestureTapCallback press;
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: press,
-      child: SizedBox(
-        width: getProportionateScreenWidth(55),
-        child: Column(
-          children: [
-            Container(
-              padding: EdgeInsets.all(getProportionateScreenWidth(15)),
-              height: getProportionateScreenWidth(55),
-              width: getProportionateScreenWidth(55),
-              decoration: BoxDecoration(
-                color: Color(0xFFFFECDF),
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: SvgPicture.asset(icon),
-            ),
-            SizedBox(height: 5),
-            Text(text, textAlign: TextAlign.center)
-          ],
-        ),
-      ),
-    );
-  }
-}

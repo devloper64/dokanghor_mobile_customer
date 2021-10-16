@@ -1,4 +1,5 @@
 import 'package:ecommerce_customer_app/components/default_button.dart';
+import 'package:ecommerce_customer_app/golbal.dart';
 import 'package:ecommerce_customer_app/model/response/product/Product.dart';
 import 'package:flutter/material.dart';
 
@@ -42,7 +43,9 @@ class Body extends StatelessWidget {
                         ),
                         child: DefaultButton(
                           text: "Add To Cart",
-                          press: () {},
+                          press: () {
+                            print('$globalColor $globalSize $globalQuantity');
+                          },
                         ),
                       ),
                     ),
