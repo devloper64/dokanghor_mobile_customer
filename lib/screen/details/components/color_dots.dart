@@ -30,6 +30,14 @@ class StateColorDots extends State<ColorDots> {
   int quantity=1;
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    globalQuantity=quantity.toString();
+    globalColor=product.productDetailsResponse!.colors![0];
+  }
+
+  @override
   Widget build(BuildContext context) {
     // Now this is fixed and only for demo
 

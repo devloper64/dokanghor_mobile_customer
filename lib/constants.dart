@@ -4,6 +4,7 @@ import 'package:ecommerce_customer_app/size_config.dart';
 import 'SharedPrefsHelper.dart';
 
 const kPrimaryColor = Color(0xffDB3022);
+const kDisableButtonColor = Color(0xffed796f);
 const kPrimaryLightColor = Color(0xFFFFECDF);
 const WHITE =  Color(0xfffffcfa);
 const SPLASH_BACK =  Color(0xfffbf3ef);

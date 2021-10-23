@@ -31,9 +31,17 @@ class _StateProductDescription extends State<ProductDescription> {
   final Product product;
   final GestureTapCallback pressOnFeedBack;
 
+
+   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    globalSize=product.productDetailsResponse!.size_mesaurments![0];
+
+   }
+
   @override
   Widget build(BuildContext context) {
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

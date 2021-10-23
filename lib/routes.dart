@@ -1,3 +1,4 @@
+import 'package:ecommerce_customer_app/screen/cart/cart_screen.dart';
 import 'package:ecommerce_customer_app/screen/categories/AllCategoriesScreen.dart';
 import 'package:ecommerce_customer_app/screen/complete_profile/complete_profile_screen.dart';
 import 'package:ecommerce_customer_app/screen/details/details_screen.dart';
@@ -14,6 +15,7 @@ import 'package:ecommerce_customer_app/screen/search/SearchScreen.dart';
 import 'package:ecommerce_customer_app/screen/sign_in/sign_in_screen.dart';
 import 'package:ecommerce_customer_app/screen/sign_up/sign_up_screen.dart';
 import 'package:ecommerce_customer_app/screen/signup_success/SignUpSuccessScreen.dart';
+import 'package:ecommerce_customer_app/screen/sipping_address/ShippingAddress.dart';
 import 'package:ecommerce_customer_app/screen/splash/SplashScreen.dart';
 import 'package:flutter/widgets.dart';
 
@@ -38,5 +40,7 @@ final Map<String, WidgetBuilder> routes = {
   PhoneSignInScreen.routeName: (context) => PhoneSignInScreen(),
   AllCategoriesScreen.routeName: (context) => AllCategoriesScreen(),
   ProductViewByIdScreen.routeName: (context) => ProductViewByIdScreen(),
+  CartScreen.routeName: (context) => CartScreen(),
+  ShippingAddressScreen.routeName: (context) => ShippingAddressScreen(),
 
 };
